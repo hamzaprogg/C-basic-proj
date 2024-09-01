@@ -1,0 +1,83 @@
+#include <stdio.h>
+
+// Function prototypes
+double add(double a, double b);
+double subtract(double a, double b);
+double multiply(double a, double b);
+double divide(double a, double b);
+
+int main() {
+    double num1, num2;
+    char operator;
+    char continueCalculation = 'y'; // Use consistent variable naming and case
+
+    printf("Welcome to the basic calculator\n");
+    printf("You can use the following operators: +, -, *, /\n");
+
+    while (continueCalculation == 'y') {
+        // Get user input
+        printf("Enter the first number: ");
+        scanf("%lf", &num1);
+
+        printf("Enter the operator: ");
+        scanf(" %c", &operator);  // Include space before %c to handle newline character
+
+        printf("Enter the second number: ");
+        scanf("%lf", &num2);  // Corrected from %num2 to &num2
+
+        double result;
+        // Perform calculation based on the operator
+        switch (operator) {
+            case '+':
+                result = add(num1, num2);
+                printf("Result: %.2lf\n", result);
+                break;
+            case '-':
+                result = subtract(num1, num2);
+                printf("Result: %.2lf\n", result);
+                break;
+            case '*':
+                result = multiply(num1, num2);
+                printf("Result: %.2lf\n", result);
+                break;
+            case '/':
+                result = divide(num1, num2);
+                if (num2 != 0) {
+                    printf("Result: %.2lf\n", result);
+                }
+                break;
+            default:
+                printf("Invalid operator!\n");
+                break;
+        }
+
+        // Ask if the user wants to continue
+        printf("Do you want to perform another calculation? (y/n): ");
+        scanf(" %c", &continueCalculation);
+    }
+
+    printf("Thank you for using the Basic Calculator. Goodbye!\n");
+
+    return 0;
+}
+
+// Function definitions
+double add(double a, double b) {
+    return a + b;
+}
+
+double subtract(double a, double b) {
+    return a - b;
+}
+
+double multiply(double a, double b) {
+    return a * b;
+}
+
+double divide(double a, double b) {
+    if (b == 0) {
+        printf("Error: Division by zero is not allowed.\n");
+        return 0;  // Return 0 to indicate an error
+    }
+    return a / b;
+}
