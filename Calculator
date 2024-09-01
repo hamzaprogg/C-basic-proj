@@ -9,7 +9,7 @@ double divide(double a, double b);
 int main() {
     double num1, num2;
     char operator;
-    char continueCalculation = 'y'; // Use consistent variable naming and case
+    char continueCalculation = 'y'; 
 
     printf("Welcome to the basic calculator\n");
     printf("You can use the following operators: +, -, *, /\n");
@@ -20,10 +20,10 @@ int main() {
         scanf("%lf", &num1);
 
         printf("Enter the operator: ");
-        scanf(" %c", &operator);  // Include space before %c to handle newline character
+        scanf(" %c", &operator);  
 
         printf("Enter the second number: ");
-        scanf("%lf", &num2);  // Corrected from %num2 to &num2
+        scanf("%lf", &num2);  
 
         double result;
         // Perform calculation based on the operator
