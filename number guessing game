@@ -1,0 +1,34 @@
+#include <stdio.h>   // Include the standard input/output library
+#include <stdlib.h>  // Include the standard library for rand and srand functions
+#include <time.h>    // Include the time library to seed the random number generator
+
+int main() {
+    int secret_number, guess, attempts = 0;
+
+    // Seed the random number generator with the current time
+    srand(time(0));
+    
+    // Generate a random number between 1 and 100
+    secret_number = rand() % 100 + 1;
+
+    printf("Welcome to the Number Guessing Game!\n");
+    printf("I have selected a number between 1 and 100. Try to guess it!\n");
+
+    // Loop until the player guesses the correct number
+    while (1) {
+        printf("Enter your guess: ");
+        scanf("%d", &guess);
+        attempts++;
+
+        if (guess < secret_number) {
+            printf("Too low! Try again.\n");
+        } else if (guess > secret_number) {
+            printf("Too high! Try again.\n");
+        } else {
+            printf("Congratulations! You guessed the number %d correctly in %d attempts.\n", secret_number, attempts);
+            break; // Exit the loop once the correct number is guessed
+        }
+    }
+
+    return 0;
+}
