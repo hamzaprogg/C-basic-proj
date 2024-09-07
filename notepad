@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_BUFFER_SIZE 10000  // Maximum size of the document
+
+int main() {
+    char command[10];          // Command input by the user
+    char buffer[MAX_BUFFER_SIZE] = "";  // Buffer to store the text document
+    char temp[100];            // Temporary buffer for user input
+    int writing = 0;           // Flag to indicate if the user is in writing mode (new or opened document)
+
+    while (1) {
+        // Display the menu and get user input
+        printf("\nEnter a command (NEW, OPEN, SAVE, EXIT): ");
+        scanf("%s", command);
+
+        // EXIT command to quit the program
+        if (strcmp(command, "EXIT") == 0) {
+            printf("Exiting the program.\n");
+            break;
+
+        // NEW command to create a new document
+        } else if (strcmp(command, "NEW") == 0) {
+            printf("Starting a new document... (type your text and 'SAVE' to save)\n");
+            writing = 1;  // Enter writing mode
+            buffer[0] = '\0';  // Clear the buffer for new document text
+
+        // OPEN command to load an existing document
+        } else if (strcmp(command, "OPEN") == 0) {
+            char filename[100];
+            printf("Enter filename to open: ");
+            scanf("%s", filename);
+
+            FILE *file = fopen(filename, "r");  // Open the file for reading
+            if (file == NULL) {
+                printf("Error: Could not open the file '%s'.\n", filename);
+            } else {
+                printf("Opening file '%s'. Contents:\n", filename);
+                buffer[0] = '\0';  // Clear buffer before loading new content
+                while (fgets(temp, sizeof(temp), file) != NULL) {
+                    printf("%s", temp);  // Print file content to the screen
+                    strcat(buffer, temp);  // Store file content in the buffer
+                }
+                fclose(file);  // Close the file after reading
+                writing = 1;  // Enable writing mode to allow further editing
+            }
+
+        // SAVE command to save the current document
+        } else if (writing && strcmp(command, "SAVE") == 0) {
+            char filename[100];
+            printf("Enter filename to save as: ");
+            scanf("%s", filename);
+
+            FILE *file = fopen(filename, "w");  // Open the file for writing
+            if (file == NULL) {
+                printf("Error: Could not open the file '%s' for writing.\n", filename);
+            } else {
+                fwrite(buffer, sizeof(char), strlen(buffer), file);  // Write the buffer to the file
+                fclose(file);  // Close the file after writing
+                printf("Document saved as '%s'.\n", filename);
+                writing = 0;  // Turn off writing mode after saving
+            }
+
+        // Handle text input when in writing mode
+        } else if (writing) {
+            getchar();  // Consume the newline left by scanf
+            printf("Write your text (or type 'SAVE' to save): ");
+            fgets(temp, sizeof(temp), stdin);  // Read the input line from the user
+
+            if (strcmp(temp, "SAVE\n") == 0) {
+                printf("Use the SAVE command to save your document.\n");
+            } else {
+                strcat(buffer, temp);  // Append the input to the document buffer
+            }
+
+        // Handle invalid commands
+        } else {
+            printf("Unknown command. Start a new document with 'NEW' or open an existing one with 'OPEN'.\n");
+        }
+    }
+
+    return 0;
+}
