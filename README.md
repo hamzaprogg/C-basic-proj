@@ -1,0 +1,1 @@
+This repository contains a variety of basic projects in C programming language, covering topics such as data types, control structures, functions, arrays, and more. These projects are designed to help beginners learn and practice C programming concepts.
