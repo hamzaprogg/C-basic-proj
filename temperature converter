@@ -1,0 +1,32 @@
+//Temperature converter 
+#include<stdio.h>
+void celsiustofahrenheit(){
+    float celcius, fahrenheit;
+    printf("Enter temperature in celcius: ");
+    scanf("%f", &celcius);
+    fahrenheit = (celcius * 9/5) + 32;
+    printf("%.2f celcius is equal to %.2f fahrenheit.\n", celcius, fahrenheit);
+}
+void fahrenheittocelsius(){
+    float fahrenheit, celcius;
+    printf("Enter temperature in fahrenheit: ");
+    scanf("%f", &fahrenheit);
+    celcius = (fahrenheit - 32) * 5 / 9;
+    printf("%1.2f fahrenheit is equal to %.2f celcius/\n", fahrenheit, celcius);
+}
+int main(){
+    int choice;
+     printf("Temperature Converter\n");
+    printf("1. Convert Celsius to Fahrenheit\n");
+    printf("2. Convert Fahrenheit to Celsius\n");
+    printf("Enter your choice (1 or 2): ");
+    scanf("%d", &choice);
+     if (choice == 1) {
+        celsiustofahrenheit();
+    } else if (choice == 2) {
+        fahrenheittocelsius();
+    } else {
+        printf("Invalid choice.\n");
+    }
+    return 0;
+}
