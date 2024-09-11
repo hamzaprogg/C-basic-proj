@@ -1,4 +1,4 @@
-//Temperature converter 
+//BASIC Temperature converter 
 #include<stdio.h>
 void celsiustofahrenheit(){
     float celcius, fahrenheit;
