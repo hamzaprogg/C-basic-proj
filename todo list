@@ -1,0 +1,102 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_TASKS 100
+#define TASK_NAME_LENGTH 100
+
+// Global array to store tasks
+char tasks[MAX_TASKS][TASK_NAME_LENGTH];
+int task_count = 0; // Global variable to keep track of the number of tasks
+
+// Function to display the menu
+void displayMenu() {
+    printf("Todo List\n");
+    printf("1. Add task\n");
+    printf("2. View tasks\n");
+    printf("3. Delete task\n");
+    printf("4. Exit\n");
+}
+
+// Function to add a task
+int addTask(char *taskName) {
+    if (task_count < MAX_TASKS) {
+        strncpy(tasks[task_count], taskName, TASK_NAME_LENGTH - 1);
+        tasks[task_count][TASK_NAME_LENGTH - 1] = '\0'; // Ensure null-termination
+        task_count++;
+        return 0; // Success
+    }
+    return -1; // Failure (no space left)
+}
+
+// Function to view tasks
+void viewTasks() {
+    if (task_count == 0) {
+        printf("No tasks to display.\n");
+        return;
+    }
+    for (int i = 0; i < task_count; i++) {
+        printf("%d. %s\n", i + 1, tasks[i]);
+    }
+}
+
+// Function to delete a task
+int deleteTask(int taskIndex) {
+    if (taskIndex < 1 || taskIndex > task_count) {
+        return -1; // Invalid index
+    }
+    // Shift tasks to fill the deleted task's spot
+    for (int i = taskIndex - 1; i < task_count - 1; i++) {
+        strncpy(tasks[i], tasks[i + 1], TASK_NAME_LENGTH);
+    }
+    task_count--;
+    return 0; // Success
+}
+
+int main() {
+    int choice;
+    char taskName[TASK_NAME_LENGTH];
+    int taskIndex;
+
+    while (1) {
+        displayMenu();
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        getchar(); // To consume the newline character after entering the choice
+
+        switch (choice) {
+            case 1: // Add task
+                printf("Enter the task name: ");
+                fgets(taskName, TASK_NAME_LENGTH, stdin);
+                taskName[strcspn(taskName, "\n")] = '\0'; // Remove trailing newline
+                if (addTask(taskName) == 0) {
+                    printf("Task added successfully.\n");
+                } else {
+                    printf("Failed to add task. Task list might be full.\n");
+                }
+                break;
+
+            case 2: // View tasks
+                viewTasks();
+                break;
+
+            case 3: // Delete task
+                printf("Enter the task number to delete: ");
+                scanf("%d", &taskIndex);
+                if (deleteTask(taskIndex) == 0) {
+                    printf("Task deleted successfully.\n");
+                } else {
+                    printf("Failed to delete task. Invalid task number.\n");
+                }
+                break;
+
+            case 4: // Exit
+                printf("Exiting...\n");
+                return 0;
+
+            default:
+                printf("Invalid choice. Please enter a number between 1 and 4.\n");
+        }
+    }
+
+    return 0;
+}
