@@ -1,0 +1,46 @@
+//Basic Quiz application
+#include <stdio.h>
+#include <string.h>
+
+#define NUM_QUESTIONS 5 // adjust this to the number of questions in your quiz
+
+typedef struct {
+    char question[256];
+    char correct_answer;
+    char options[4][256]; // adjust this to the number of options per question
+} Question;
+
+Question questions[NUM_QUESTIONS] = {
+    {"What is the capital of France?", 'A', {"A) Paris", "B) London", "C) Berlin", "D) Rome"}},
+    {"What is 2 + 2?", 'B', {"A) 3", "B) 4", "C) 5", "D) 6"}},
+    // add more questions here...
+};
+
+int main() {
+    int score = 0;
+    int current_question = 0;
+
+    while (current_question < NUM_QUESTIONS) {
+        printf("%s\n", questions[current_question].question);
+        printf("A) %s\n", questions[current_question].options[0]);
+        printf("B) %s\n", questions[current_question].options[1]);
+        printf("C) %s\n", questions[current_question].options[2]);
+        printf("D) %s\n", questions[current_question].options[3]);
+
+        char user_answer;
+        scanf(" %c", &user_answer);
+
+        if (user_answer == questions[current_question].correct_answer) {
+            score++;
+            printf("Correct!\n");
+        } else {
+            printf("Incorrect. The correct answer is %c.\n", questions[current_question].correct_answer);
+        }
+
+        current_question++;
+    }
+
+    printf("Your final score is %d/%d.\n", score, NUM_QUESTIONS);
+
+    return 0;
+}
