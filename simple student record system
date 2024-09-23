@@ -1,0 +1,20 @@
+#include<stdio.h>
+int main(){
+    int age, studentid;
+    float fees, gpa;
+    char name[30],major[30];
+    printf("Student record system\n");
+    printf("full name:\n");
+    scanf("%s", &name);
+    printf("Age:\n");
+    scanf("%d", &age);
+    printf("Student id:\n");
+    scanf("%d", &studentid);
+    printf("Major:\n");
+    scanf("%s", &major);
+    printf("fees:\n");
+    scanf("%f", &fees);
+    printf("GPA:\n");
+    scanf("%f", &gpa);
+    return 0;
+}
