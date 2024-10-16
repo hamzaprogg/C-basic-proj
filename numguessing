@@ -1,0 +1,23 @@
+//Number Guessing Game
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+int main(){
+    srand(time(0));
+    int randomnumber = rand() % 100 + 1;
+    int playerguess;
+    int attempts = 0;
+    while (playerguess != randomnumber){
+        printf("Enter the guess between 1 - 100:");
+        scanf("%d", &playerguess);
+        attempts ++;
+        if (playerguess < randomnumber){
+            printf("Too Low! Try Again\n");
+        }else if(playerguess > randomnumber){
+            printf("Too High! Try Again\n");
+        }else{
+            printf("Wow! You guessed the number!!\n");
+        }
+    }
+    return 0;
+}
