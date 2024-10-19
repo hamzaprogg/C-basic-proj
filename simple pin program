@@ -1,0 +1,17 @@
+#include<stdio.h>
+int main(){
+    int password = 8514;
+    int userinput;
+    printf("Welcome back\n");
+ while(password){
+    printf("Please enter your pin:\n");
+    scanf("%d", &userinput);
+    if(userinput == password){
+        printf("You are good to go\n");
+        break;
+    }else{
+        printf("The pin is incorrect!\n");
+    }
+    }
+    return 0;
+}
