@@ -1,0 +1,24 @@
+#include<stdio.h>
+int main(){
+    int floor;
+    printf("Welcome to elevator Wenshan Building\n");
+    printf("On what floor you wanna go (1,2,3,4)?\n");
+    scanf("%d", &floor);
+    switch(floor){
+        case 1:
+        printf("You'll go the 1st floor\n");
+        break;
+        case 2:
+        printf("You'll go the second floor\n");
+        break;
+        case 3:
+        printf("You'll go to the third floor\n");
+        break;
+        case 4:
+        printf("You'll go to the fourth floor\n");
+        break;
+        default:
+        printf("Please enter valid elevator number!");
+    }
+    return 0;
+}
