@@ -1,0 +1,22 @@
+#include<stdio.h>
+#include<string.h> 
+
+int main() {
+    char button[4]; 
+    printf("There are two buttons: ON or OFF\n");
+    printf("Type: ON or OFF: ");
+    
+    scanf("%s", button);  
+
+    if (strcmp(button, "ON") == 0) {
+        printf("The bulb is on\n");
+    } 
+    else if (strcmp(button, "OFF") == 0) {
+        printf("The bulb is off now\n");
+    } 
+    else {
+        printf("Invalid input\n");
+    }
+
+    return 0;
+}
